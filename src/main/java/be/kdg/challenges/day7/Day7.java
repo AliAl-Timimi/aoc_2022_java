@@ -1,5 +1,6 @@
 package be.kdg.challenges.day7;
 
+import be.kdg.util.ColoredPrint;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.FileNotFoundException;
@@ -15,35 +16,34 @@ public class Day7 {
     private int smallestDirToDelete;
 
     public void run() {
-        System.out.println("\n\nDay 7:");
+        ColoredPrint.setColor(ColoredPrint.Color.YELLOW_BOLD_BRIGHT);
+        ColoredPrint.println("\n\nDay 7:");
         readInput();
-        printFileSystem(root);
+        // printFileSystem(root);
         part1();
         part2();
     }
 
     private void part1() {
-        System.out.println("Part 1:");
-        System.out.println(totalOfDirsUnder100_000(root));
+        ColoredPrint.print("Part 1: ");
+        ColoredPrint.println(totalOfDirsUnder100_000(root));
     }
 
     private void part2() {
-        System.out.println("Part 2:");
+        ColoredPrint.print("Part 2: ");
         totalFree = TOTAL_SIZE - root.getSize();
         smallestDirToDelete = root.getSize();
         sizeOfSmallestDirToDelete(root);
-        System.out.println(smallestDirToDelete);
+        ColoredPrint.println(smallestDirToDelete);
     }
 
     private void sizeOfSmallestDirToDelete(Directory dir) {
         int dirSize = dir.getSize();
         if (totalFree + dirSize >= TOTAL_REQUIRED) {
             for (var d : dir.getChildren()) {
-                if (d instanceof Directory)
-                    sizeOfSmallestDirToDelete((Directory) d);
+                if (d instanceof Directory) sizeOfSmallestDirToDelete((Directory) d);
             }
-            if (dirSize < smallestDirToDelete)
-                smallestDirToDelete = dirSize;
+            if (dirSize < smallestDirToDelete) smallestDirToDelete = dirSize;
         }
     }
 
@@ -52,7 +52,6 @@ public class Day7 {
             boolean command;
             boolean cd;
             while (sc.hasNextLine()) {
-                command = false;
                 String[] line = sc.nextLine().split(" ");
                 command = line[0].equals("$");
                 if (command) {
@@ -64,9 +63,7 @@ public class Day7 {
                             if (currentDir == null) {
                                 root = new Directory(line[2], new ArrayList<>(), null);
                                 currentDir = root;
-                            } else {
-                                currentDir = dirExists(line[2]);
-                            }
+                            } else currentDir = dirExists(line[2]);
                         }
                     }
                 } else {
@@ -92,7 +89,7 @@ public class Day7 {
     }
 
     private void printFileSystem(Directory dir) {
-        System.out.printf("%s%n", dir);
+        ColoredPrint.printf("%s%n", dir);
         printFileSystem(dir, 1);
 
     }
@@ -100,10 +97,10 @@ public class Day7 {
     private void printFileSystem(Directory dir, int depth) {
         for (var dirOrFile : dir.getChildren()) {
             if (dirOrFile instanceof Directory) {
-                System.out.printf("%s%s%n", StringUtils.repeat(" ", depth * 2), dirOrFile);
+                ColoredPrint.printf("%s%s%n", StringUtils.repeat(" ", depth * 2), dirOrFile);
                 printFileSystem((Directory) dirOrFile, depth + 1);
             } else {
-                System.out.printf("%s%s%n", StringUtils.repeat(" ", depth * 2), dirOrFile);
+                ColoredPrint.printf("%s%s%n", StringUtils.repeat(" ", depth * 2), dirOrFile);
             }
         }
     }

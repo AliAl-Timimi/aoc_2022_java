@@ -1,17 +1,20 @@
 package be.kdg.challenges.day2;
 
+import be.kdg.util.ColoredPrint;
+
 import java.io.File;
 import java.util.Scanner;
 
 public class Day2 {
-    public static void run() {
-        System.out.println("\n\nDay 2:");
+    public void run() {
+        ColoredPrint.setColor(ColoredPrint.Color.RED_BOLD_BRIGHT);
+        ColoredPrint.println("\n\nDay 2:");
         part1();
         part2();
     }
 
-    private static void part1() {
-        System.out.println("Part 1:");
+    private void part1() {
+        ColoredPrint.print("Part 1: ");
         try (Scanner sc = new Scanner(new File("src/main/java/be/kdg/challenges/day2/strategy.txt"))) {
             int total = 0;
             Game enemy;
@@ -22,14 +25,14 @@ public class Day2 {
                 player = move[1].equalsIgnoreCase("X") ? Game.ROCK : move[1].equalsIgnoreCase("Y") ? Game.PAPER : Game.SCISSORS;
                 total+= checkScore(player, enemy);
             }
-            System.out.println(total);
+            ColoredPrint.println(total);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private static void part2() {
-        System.out.println("Part 2:");
+    private void part2() {
+        ColoredPrint.print("Part 2: ");
         try (Scanner sc = new Scanner(new File("src/main/java/be/kdg/challenges/day2/strategy.txt"))) {
             int total = 0;
             Game enemy;
@@ -53,13 +56,13 @@ public class Day2 {
                 }
                 total += checkScore(player, enemy);
             }
-            System.out.println(total);
+            ColoredPrint.println(total);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private static int checkScore(Game player, Game enemy) {
+    private int checkScore(Game player, Game enemy) {
         int total = 0;
         if ((player.value == 1 && enemy.value == 3))total += 6;
         else if (enemy.value == 1 && player.value == 3)total += 0;

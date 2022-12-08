@@ -1,5 +1,7 @@
 package be.kdg.challenges.day5;
 
+import be.kdg.util.ColoredPrint;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -8,18 +10,19 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Day5 {
-    private static List<String> moves;
-    private static HashMap<Integer, ArrayList<String>> stacks;
+    private List<String> moves;
+    private HashMap<Integer, ArrayList<String>> stacks;
 
-    public static void run() {
-        System.out.println("\n\nDay 5:");
+    public void run() {
+        ColoredPrint.setColor(ColoredPrint.Color.PURPLE_BOLD_BRIGHT);
+        ColoredPrint.println("\n\nDay 5:");
         readInput();
         part1();
         readInput();
         part2();
     }
 
-    private static void readInput() {
+    private void readInput() {
         stacks = new HashMap<>();
         moves = new ArrayList<>();
         try (Scanner sc = new Scanner(new File("src/main/java/be/kdg/challenges/day5/crates.txt"))) {
@@ -55,8 +58,8 @@ public class Day5 {
         }
     }
 
-    private static void part1() {
-        System.out.println("Part 1:");
+    private void part1() {
+        ColoredPrint.print("Part 1: ");
         for (String line : moves) {
             if (!line.isBlank()) {
                 String[] split = line.split(" ");
@@ -73,8 +76,8 @@ public class Day5 {
         printTopCrates();
     }
 
-    private static void part2() {
-        System.out.println("Part 2:");
+    private void part2() {
+        ColoredPrint.print("Part 2: ");
         for (String line : moves) {
             if (!line.isBlank()) {
                 String[] split = line.split(" ");
@@ -91,11 +94,11 @@ public class Day5 {
         printTopCrates();
     }
 
-    private static void printTopCrates() {
+    private void printTopCrates() {
         var sb = new StringBuilder();
         for (int i = 1; i <= stacks.size(); i++) {
             sb.append(stacks.get(i).get(0));
         }
-        System.out.println(sb);
+        ColoredPrint.println(sb.toString());
     }
 }
