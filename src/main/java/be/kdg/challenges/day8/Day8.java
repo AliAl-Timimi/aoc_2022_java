@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class Day8 {
-
     private int[][] treeGrid;
 
     public void run() {
@@ -80,7 +79,7 @@ public class Day8 {
         int top, left, right, bottom;
         boolean topB, leftB, rightB, bottomB;
         int topI, leftI, rightI, bottomI;
-        int scenicScore =0;
+        int scenicScore = 0;
         for (int i = 0; i < treeGrid.length; i++) {
             for (int j = 0; j < treeGrid[i].length; j++) {
                 top = 0;

@@ -91,7 +91,6 @@ public class Day7 {
     private void printFileSystem(Directory dir) {
         ColoredPrint.printf("%s%n", dir);
         printFileSystem(dir, 1);
-
     }
 
     private void printFileSystem(Directory dir, int depth) {

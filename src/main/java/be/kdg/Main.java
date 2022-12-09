@@ -8,9 +8,8 @@ import be.kdg.challenges.day5.Day5;
 import be.kdg.challenges.day6.Day6;
 import be.kdg.challenges.day7.Day7;
 import be.kdg.challenges.day8.Day8;
+import be.kdg.challenges.day9.Day9;
 
-
-// * This is the main class of the application.
 public class Main {
     public static void main(String[] args) {
         new Day1().run();
@@ -21,5 +20,6 @@ public class Main {
         new Day6().run();
         new Day7().run();
         new Day8().run();
+        new Day9().run();
     }
 }
