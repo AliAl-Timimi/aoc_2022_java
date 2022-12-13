@@ -20,6 +20,10 @@ public class ColoredPrint {
         System.out.println(Color.getCode(color) + message + Color.getCode(Color.RESET));
     }
 
+    public static void println() {
+        System.out.println();
+    }
+
     public static void print(int message){
         print(String.valueOf(message));
     }

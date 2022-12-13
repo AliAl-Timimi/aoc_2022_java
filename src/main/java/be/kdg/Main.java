@@ -2,6 +2,9 @@ package be.kdg;
 
 import be.kdg.challenges.day1.Day1;
 import be.kdg.challenges.day10.Day10;
+import be.kdg.challenges.day11.Day11;
+import be.kdg.challenges.day12.Day12;
+import be.kdg.challenges.day13.Day13;
 import be.kdg.challenges.day2.Day2;
 import be.kdg.challenges.day3.Day3;
 import be.kdg.challenges.day4.Day4;
@@ -23,5 +26,8 @@ public class Main {
         new Day8().run();
         new Day9().run();
         new Day10().run();
+        new Day11().run();
+        new Day12().run();
+        new Day13().run();
     }
 }
