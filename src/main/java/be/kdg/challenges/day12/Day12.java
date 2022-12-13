@@ -26,15 +26,31 @@ public class Day12 {
 
     private void part1() {
         ColoredPrint.print("Part 1: ");
+        var start = cells.stream().filter(Cell::isStart).findFirst().get();
+        ColoredPrint.println(getShortest(start));
+    }
+
+    private void part2() {
+        ColoredPrint.print("Part 2: ");
+        var shortest = Integer.MAX_VALUE;
+        var starts = cells.stream().filter(c -> c.getHeight() == 'a' && getOption(c).stream().anyMatch(cell -> cell.getHeight() == 'b')).toList();
+        for (Cell cell : starts) {
+            int s = getShortest(cell);
+            if (s < shortest)
+                shortest = s;
+        }
+        ColoredPrint.println(shortest);
+    }
+
+    private int getShortest(Cell cell) {
         var queue = new ArrayDeque<Cell>();
         var visited = new boolean[rows][columns];
         var parent = new Cell[rows][columns];
         var found = false;
         var shortestPath = 0;
-        var start = cells.stream().filter(Cell::isStart).findFirst().get();
         var end = cells.stream().filter(Cell::isEnd).findFirst().get();
-        queue.add(start);
-        visited[start.getX()][start.getY()] = true;
+        queue.add(cell);
+        visited[cell.getX()][cell.getY()] = true;
         while (!queue.isEmpty()) {
             var current = queue.poll();
             if (current.getX() == end.getX() && current.getY() == end.getY()) {
@@ -52,52 +68,12 @@ public class Day12 {
         }
         if (found) {
             var current = new Cell(end.getX(), end.getY(), end.getHeight());
-            while (current.getX() != start.getX() || current.getY() != start.getY()) {
+            while (current.getX() != cell.getX() || current.getY() != cell.getY()) {
                 shortestPath++;
                 current = parent[current.getX()][current.getY()];
             }
         }
-        ColoredPrint.println(shortestPath);
-    }
-
-    private void part2() {
-        ColoredPrint.print("Part 2: ");
-        var shortest = Integer.MAX_VALUE;
-        var starts = cells.stream().filter(c -> c.getHeight() == 'a' && getOption(c).stream().anyMatch(cell -> cell.getHeight() == 'b')).toList();
-        for (Cell cell : starts) {
-            var queue = new ArrayDeque<Cell>();
-            var visited = new boolean[rows][columns];
-            var parent = new Cell[rows][columns];
-            var found = false;
-            var shortestPath = 0;
-            var end = cells.stream().filter(Cell::isEnd).findFirst().get();
-            queue.add(cell);
-            visited[cell.getX()][cell.getY()] = true;
-            while (!queue.isEmpty()) {
-                var current = queue.poll();
-                if (current.getX() == end.getX() && current.getY() == end.getY()) {
-                    found = true;
-                    break;
-                }
-                var neighbors = getOption(current);
-                for (var neighbor : neighbors) {
-                    if (!visited[neighbor.getX()][neighbor.getY()]) {
-                        queue.add(neighbor);
-                        visited[neighbor.getX()][neighbor.getY()] = true;
-                        parent[neighbor.getX()][neighbor.getY()] = current;
-                    }
-                }
-            }
-            if (found) {
-                var current = new Cell(end.getX(), end.getY(), end.getHeight());
-                while (current.getX() != cell.getX() || current.getY() != cell.getY()) {
-                    shortestPath++;
-                    current = parent[current.getX()][current.getY()];
-                }
-                if (shortestPath < shortest) shortest = shortestPath;
-            }
-        }
-        ColoredPrint.println(shortest);
+        return shortestPath;
     }
 
     private List<Cell> getOption(Cell cell) {
@@ -152,9 +128,9 @@ public class Day12 {
         }
     }
 
-    public class Cell {
-        private int x;
-        private int y;
+    public static class Cell {
+        private final int x;
+        private final int y;
         private char height;
         private boolean start;
 
