@@ -17,10 +17,13 @@ public class Day11 {
     public void run() {
         ColoredPrint.setColor(ColoredPrint.Color.GREEN_BOLD_BRIGHT);
         ColoredPrint.println("\n\nDay 11");
+        long start = System.currentTimeMillis();
         readData();
         part1();
         readData();
         part2();
+        long end = System.currentTimeMillis();
+        ColoredPrint.println("Time: " + (end - start) + "ms");
     }
 
     private void readData() {

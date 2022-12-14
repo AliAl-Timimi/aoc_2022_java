@@ -19,9 +19,12 @@ public class Day13 {
     public void run() {
         ColoredPrint.setColor(ColoredPrint.Color.CYAN_BOLD_BRIGHT);
         ColoredPrint.println("\n\nDay 13");
+        long start = System.currentTimeMillis();
         readData();
         part1();
         part2();
+        long end = System.currentTimeMillis();
+        ColoredPrint.println("Time: " + (end - start) + "ms");
     }
 
     private void part1() {
@@ -37,7 +40,7 @@ public class Day13 {
 
     private void part2() {
         ColoredPrint.print("Part 2: ");
-        var list = new ArrayList<Object>();
+        var list = new ArrayList<>();
         var divider2 = (List.of(List.of(2)));
         var divider6 = (List.of(List.of(6)));
         for (Pair pair : pairs) {
@@ -75,6 +78,33 @@ public class Day13 {
             this.right = parseList(right);
         }
 
+        private static List<Object> toList(Object o) {
+            return o instanceof List ? (List<Object>) o : Collections.singletonList(o);
+        }
+
+        public static int checkList(Object left, Object right) {
+            if (left instanceof Integer && right instanceof Integer) {
+                return ((Integer) left).compareTo((Integer) right);
+            }
+
+            Iterator<Object> leftI = toList(left).iterator(), rightI = toList(right).iterator();
+            while (true) {
+                boolean hasNextLeft = leftI.hasNext(), hasNextRight = rightI.hasNext();
+                if (!hasNextLeft && !hasNextRight) {
+                    return 0;
+                } else if (!hasNextLeft && hasNextRight) {
+                    return -1;
+                } else if (hasNextLeft && !hasNextRight) {
+                    return 1;
+                } else {
+                    int result = checkList(leftI.next(), rightI.next());
+                    if (result != 0) {
+                        return result;
+                    }
+                }
+
+            }
+        }
 
         private List<Object> parseList(String s) {
             String converted = s.replace(',', ' ').replace('[', ' ').replace(']', ' ');
@@ -103,34 +133,6 @@ public class Day13 {
 
         public int checkOrder() {
             return checkList(left, right);
-        }
-
-        private static List<Object> toList(Object o) {
-            return o instanceof List ? (List<Object>) o : Collections.singletonList(o);
-        }
-
-        public static int checkList(Object left, Object right) {
-            if (left instanceof Integer && right instanceof Integer) {
-                return ((Integer) left).compareTo((Integer) right);
-            }
-
-            Iterator<Object> leftI = toList(left).iterator(), rightI = toList(right).iterator();
-            while (true) {
-                boolean hasNextLeft = leftI.hasNext(), hasNextRight = rightI.hasNext();
-                if (!hasNextLeft && !hasNextRight) {
-                    return 0;
-                } else if (!hasNextLeft && hasNextRight) {
-                    return -1;
-                } else if (hasNextLeft && !hasNextRight) {
-                    return 1;
-                } else {
-                    int result = checkList(leftI.next(), rightI.next());
-                    if (result != 0) {
-                        return result;
-                    }
-                }
-
-            }
         }
     }
 }

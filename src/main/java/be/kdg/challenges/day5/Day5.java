@@ -16,10 +16,13 @@ public class Day5 {
     public void run() {
         ColoredPrint.setColor(ColoredPrint.Color.PURPLE_BOLD_BRIGHT);
         ColoredPrint.println("\n\nDay 5:");
+        long start = System.currentTimeMillis();
         readInput();
         part1();
         readInput();
         part2();
+        long end = System.currentTimeMillis();
+        ColoredPrint.println("Time: " + (end - start) + "ms");
     }
 
     private void readInput() {

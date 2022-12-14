@@ -18,10 +18,13 @@ public class Day7 {
     public void run() {
         ColoredPrint.setColor(ColoredPrint.Color.YELLOW_BOLD_BRIGHT);
         ColoredPrint.println("\n\nDay 7:");
+        long start = System.currentTimeMillis();
         readInput();
         // printFileSystem(root);
         part1();
         part2();
+        long end = System.currentTimeMillis();
+        ColoredPrint.println("Time: " + (end - start) + "ms");
     }
 
     private void part1() {

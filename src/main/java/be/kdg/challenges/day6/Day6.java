@@ -12,9 +12,12 @@ public class Day6 {
     public void run() {
         ColoredPrint.setColor(ColoredPrint.Color.CYAN_BOLD_BRIGHT);
         ColoredPrint.println("\n\nDay 6:");
+        long start = System.currentTimeMillis();
         readData();
         part1();
         part2();
+        long end = System.currentTimeMillis();
+        ColoredPrint.println("Time: " + (end - start) + "ms");
     }
 
     private void part1() {

@@ -16,9 +16,12 @@ public class Day10 {
     public void run() {
         ColoredPrint.setColor(ColoredPrint.Color.WHITE_BOLD_BRIGHT);
         ColoredPrint.println("\n\nDay 10");
+        long start = System.currentTimeMillis();
         readData();
         part1();
         part2();
+        long end = System.currentTimeMillis();
+        ColoredPrint.println("Time: " + (end - start) + "ms");
     }
 
     private void readData() {
@@ -73,8 +76,8 @@ public class Day10 {
             operations.get(0).decreaseCyclesLeft();
             if (operations.get(0).getCyclesLeft() == 0)
                 x += operations.remove(0).getStrength();
-
         }
+        ColoredPrint.println();
     }
 
     public static class Operation {
